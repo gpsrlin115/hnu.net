@@ -4,21 +4,22 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("숫자를 입력하세요: ");
-        int num = int.Parse(Console.ReadLine());
+        Console.Write("문자열을 입력하세요: ");
+        string str = Console.ReadLine();
+        int vowelCount = 0;
 
-        if (num > 0)
+        for (int i = 0; i < str.Length; i++)
         {
-            Console.WriteLine("입력한 숫자는 양수입니다.");
+            char ch = str[i];
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+                ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+            {
+                vowelCount++;
+            }
         }
-        else if (num < 0)
-        {
-            Console.WriteLine("입력한 숫자는 음수입니다.");
-        }
-        else
-        {
-            Console.WriteLine("입력한 숫자는 0입니다.");
-        }
+
+        Console.WriteLine("입력한 문자열에서 모음의 개수는 " + vowelCount + "개 입니다.");
         Console.ReadKey();
     }
+    
 }
