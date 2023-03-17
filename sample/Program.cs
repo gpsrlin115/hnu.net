@@ -1,25 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("문자열을 입력하세요: ");
-        string str = Console.ReadLine();
-        int vowelCount = 0;
+        Console.Write("숫자를 입력하세요 (여러 개의 숫자를 입력하려면 띄어쓰기로 구분하세요): ");
+        string input = Console.ReadLine();
+        string[] nums = input.Split();
+        List<int> uniqueNums = new List<int>();
+        HashSet<int> checkedNums = new HashSet<int>();
 
-        for (int i = 0; i < str.Length; i++)
+        for (int i = 0; i < nums.Length; i++)
         {
-            char ch = str[i];
-            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
-                ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+            int num = int.Parse(nums[i]);
+            if (!checkedNums.Contains(num))
             {
-                vowelCount++;
+                checkedNums.Add(num);
+                if (!uniqueNums.Contains(num))
+                {
+                    uniqueNums.Add(num);
+                }
             }
         }
 
-        Console.WriteLine("입력한 문자열에서 모음의 개수는 " + vowelCount + "개 입니다.");
+        Console.WriteLine("중복되지 않은 숫자들: " + string.Join(" ", uniqueNums));
         Console.ReadKey();
     }
-    
 }
