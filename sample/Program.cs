@@ -5,26 +5,37 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("숫자를 입력하세요 (여러 개의 숫자를 입력하려면 띄어쓰기로 구분하세요): ");
+        Console.Write("문자열을 입력하세요: ");
         string input = Console.ReadLine();
-        string[] nums = input.Split();
-        List<int> uniqueNums = new List<int>();
-        HashSet<int> checkedNums = new HashSet<int>();
+        string[] words = input.Split();
+        Dictionary<string, int> countDict = new Dictionary<string, int>();
 
-        for (int i = 0; i < nums.Length; i++)
+        for (int i = 0; i < words.Length; i++)
         {
-            int num = int.Parse(nums[i]);
-            if (!checkedNums.Contains(num))
+            string word = words[i].ToLower();
+            if (!countDict.ContainsKey(word))
             {
-                checkedNums.Add(num);
-                if (!uniqueNums.Contains(num))
-                {
-                    uniqueNums.Add(num);
-                }
+                countDict.Add(word, 1);
+            }
+            else
+            {
+                countDict[word]++;
             }
         }
 
-        Console.WriteLine("중복되지 않은 숫자들: " + string.Join(" ", uniqueNums));
+        int maxCount = 0;
+        string maxWord = "";
+
+        foreach (KeyValuePair<string, int> entry in countDict)
+        {
+            if (entry.Value > maxCount)
+            {
+                maxCount = entry.Value;
+                maxWord = entry.Key;
+            }
+        }
+
+        Console.WriteLine($"가장 많이 나오는 단어: {maxWord}, 개수: {maxCount}");
         Console.ReadKey();
     }
 }
